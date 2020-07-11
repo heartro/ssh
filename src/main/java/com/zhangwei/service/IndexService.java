@@ -10,6 +10,12 @@ import java.util.List;
 
 @Service
 public class IndexService {
+
+    @Transactional
+    public void addUser(User user) {
+        userDAO.insert(user);
+    }
+
     @Transactional(readOnly = true)
     public List<User> getUserAll() {
         return userDAO.selectAll();

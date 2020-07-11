@@ -39,9 +39,9 @@
     	<property name="maxWait" value="5000" />
     </bean >
 
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="dataSource" ref="dataSource" />
-		<property name="nestedTransactionAllowed" value="true" />
+		<property name="sessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -52,11 +52,14 @@
 				<prop key="hibernate.hbm2ddl.auto">validate</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.allow_update_outside_transaction">true</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="com.zhangwei.dao,com.zhangwei.entity"/>
-
+		<property name="packagesToScan">
+			<list>
+				<value>com.zhangwei.dao</value>
+				<value>com.zhangwei.entity</value>
+			</list>
+		</property>
 	</bean>
 
 </beans>

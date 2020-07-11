@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,6 +23,14 @@ public class IndexController {
     @ResponseBody
     public List<User> test2() {
         return indexService.getUserAll();
+    }
+
+    @GetMapping("/test3")
+    @ResponseBody
+    public String test3() {
+        User user = new User("王五", "wangwu", "123456", new Date());
+        indexService.addUser(user);
+        return user.toString();
     }
 
     @Autowired

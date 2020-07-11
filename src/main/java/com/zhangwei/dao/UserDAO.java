@@ -10,6 +10,10 @@ import java.util.List;
 @Repository
 public class UserDAO {
 
+    public void insert(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
+
     public List<User> selectAll() {
         return sessionFactory.getCurrentSession().createQuery("from User", User.class).list();
     }

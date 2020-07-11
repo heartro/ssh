@@ -1,8 +1,8 @@
 package com.zhangwei.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +10,8 @@ import java.util.Date;
 @Table(name = "User")
 public class User implements Serializable {
     @Id
+    @GeneratedValue(generator = "native")
+    @GenericGenerator(name = "native", strategy="native")
     private Integer id;
     private String name;
     private String username;
@@ -18,12 +20,29 @@ public class User implements Serializable {
 
     public User() {
     }
+    public User(String name, String username, String password, Date createTime) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.createTime = createTime;
+    }
     public User(Integer id, String name, String username, String password, Date createTime) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 
     public Integer getId() {
